@@ -2,7 +2,7 @@
 
 Hello Everyone!
 
-This is Flask based Web Scraping application. It is getting data from "https://google.com/covid19-map/".
+This is Flask based Web Scraping application. It is getting data from "https://www.worldometers.info/coronavirus/#countries".
 
 I have used Twilio as a Cloud Communication Platform.
 
