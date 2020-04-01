@@ -5,11 +5,13 @@ from bs4 import BeautifulSoup
 from flask import Flask, request, redirect
 from twilio.twiml.messaging_response import MessagingResponse, Message, Body
 
-page = requests.get('https://google.org/crisisresponse/covid19-map')
+page = requests.get('https://www.worldometers.info/coronavirus/#countries')
 
 soup = BeautifulSoup(page.content, 'html.parser')
 
 table_body = soup.find('tbody')
+
+table_body_all = soup.find
 
 rows = table_body.find_all('tr')
 
@@ -30,7 +32,8 @@ def sms_replay():
         for i in range(len(list)):
             if list[i] == msg:
                 return True
-        return False
+            else:
+
 
         
 
@@ -41,33 +44,31 @@ def sms_replay():
 
 
         if search(cols, msg):
-            txtToSend = (
+            txtToSnd = (
                 f"{cols[0].upper()}{n1}{n1}"
-                f"Confirmed Cases: {cols[1]}{n1}"
-                f"Cases per 1 Million People: {cols[2]}{n1}"
-                f"Recoverd: {cols[3]}{n1}"
-                f"Deaths {cols[4]}{n1}{n1}"
+                f"Total Cases: {cols[1]}{n1}"
+                f"Cases per 1 Million People: {cols[8]}{n1}"
+                f"Recoverd: {cols[5]}{n1}"
+                f"Deaths {cols[3]}{n1}{n1}"
+                f"Reported First Case: {cols[10]}{n1}{n1}"
                 f"About This Data: "
                 f"{n1}{n1}"
-                f"This data changes rapidly, so what’s shown may be out of date(1 Hour old).Information about reported cases is also available on the World Health Organization site.{n1}{n1}"
+                f"The coronavirus COVID-19 is affecting 203 countries and territories around the world and 2 international conveyances: the Diamond Princess cruise ship harbored in Yokohama, Japan, and the Holland America's MS Zaandam cruise ship. The day is reset after midnight GMT+0.{n1}{n1}"
                 f"{n1}{n1}"
-                f"To get worlwide data about coronavirus replay with <worldwide>"
+                f"To get worlwide data about coronavirus replay with <World>"
                 f"{n1}{n1}"
-                f"Sorce: https://google.org/crisisresponse/covid19-map"
+                f"Sorce: https://www.worldometers.info/coronavirus/#countries"
                 f"{n1}{n1}"
                 f"Have Questions? Please Visit: https://www.who.int/news-room/q-a-detail/q-a-coronaviruses{n1}{n1}"
                 f"Stay Home! Stay Safe!{n1}{n1}{n1}"
                 f"DHAVAL VASVELIYA"
                 )
             
-    resp = MessagingResponse()
-    resp.message(txtToSend)
+            resp = MessagingResponse()
+            resp.message(txtToSnd)
 
-    return str(resp)
-
-
-
-
+            return str(resp)
+            
 if __name__  == "__main__":
     application.run()
 
